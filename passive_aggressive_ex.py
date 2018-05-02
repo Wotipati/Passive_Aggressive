@@ -2,6 +2,7 @@ import numpy as np
 from simple_dataset import SimpleDataset
 from passive_aggressive import PassiveAggressive
 
+
 class PassiveAggressiveOne(PassiveAggressive):
     def __init__(self, c=0.1):
         self.c = c
