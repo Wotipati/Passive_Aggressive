@@ -28,7 +28,7 @@ class PassiveAggressive:
 
 
 def main():
-    dataset = SimpleDataset(x=3, y=5)
+    dataset = SimpleDataset(is_confused=True, x=3, y=5)
     feature_vec = dataset.dataset.ix[:, "x1":"x2"]
     feature_vec["b"] = np.ones(dataset.dataset.shape[0])
     feature_vec = feature_vec.as_matrix()

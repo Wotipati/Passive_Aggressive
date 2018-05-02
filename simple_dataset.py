@@ -3,11 +3,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 class SimpleDataset:
-    def __init__(self, total_num=1000, x=5, y=3):
+    def __init__(self, total_num=1000, is_confused=False, confuse_bin=50, x=5, y=3):
         np.random.seed(1)
         feature = np.random.randn(total_num, 2)
         self.dataset = pd.DataFrame(feature, columns=["x1", "x2"])
         self.dataset["label"] = self.dataset.apply(lambda row : 1 if (x*row.x1 + y*row.x2 - 1)>0 else -1, axis=1)
+
+        if is_confused:
+            def make_data_confused(data):
+                label = -1*data.label if (data.name % confuse_bin) == 0 else data.label
+                return label
+
+            self.dataset["label"] = self.dataset.apply(make_data_confused, axis=1)
 
 
     def show_dataset(self):
