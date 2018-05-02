@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 class SimpleDataset:
-    def __init__(self, total_num=1000, is_confused=False, confuse_bin=50, x=5, y=3):
+    def __init__(self, total_num=1000, is_confused=False, confuse_bin=30, x=5, y=3):
         np.random.seed(1)
         feature = np.random.randn(total_num, 2)
         self.dataset = pd.DataFrame(feature, columns=["x1", "x2"])
