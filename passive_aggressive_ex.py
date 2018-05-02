@@ -12,6 +12,16 @@ class PassiveAggressiveOne(PassiveAggressive):
         return min(self.c, loss/l2_norm)
 
 
+class PassiveAggressiveTwo(PassiveAggressive):
+    def __init__(self, c=0.1):
+        self.c = c
+        PassiveAggressive.__init__(self)
+
+    def calc_eta(self, loss, vec_x):
+        l2_norm = vec_x.dot(vec_x)
+        return loss/(l2_norm+1/(2*self.c))
+
+
 def main():
     dataset = SimpleDataset(x=3, y=5)
     feature_vec = dataset.dataset.ix[:, "x1":"x2"]
@@ -21,7 +31,7 @@ def main():
     y = dataset.dataset.ix[:,"label"]
     y = y.as_matrix()
 
-    model = PassiveAggressiveOne(0.1)
+    model = PassiveAggressiveTwo(0.1)
 
     for i in range(len(y)):
         model.fit(feature_vec[i], y[i])
