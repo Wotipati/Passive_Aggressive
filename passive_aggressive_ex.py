@@ -27,35 +27,37 @@ class PassiveAggressiveTwo(PassiveAggressive):
 
 
 def main():
-    dataset = SimpleDataset(is_confused=True, x=3, y=5)
-    feature_vec = dataset.dataset.ix[:, "x1":"x2"]
-    feature_vec["b"] = np.ones(dataset.dataset.shape[0])
-    feature_vec = feature_vec.as_matrix()
+    train_dataset = SimpleDataset(total_num=1000, is_confused=True,  x=3, y=5, seed=1)
+    test_dataset  = SimpleDataset(total_num=100 , is_confused=False, x=3, y=5, seed=2)
 
-    y = dataset.dataset.ix[:,"label"]
-    y = y.as_matrix()
-
-    model = PassiveAggressive()
+    model_PA  = PassiveAggressive()
     model_one = PassiveAggressiveOne(0.1)
     model_two = PassiveAggressiveTwo(0.1)
 
     plt.style.use('seaborn-colorblind')
-    plt.xlim([dataset.dataset.x1.min() - 0.1, dataset.dataset.x1.max() + 0.1])
-    plt.ylim([dataset.dataset.x2.min() - 0.1, dataset.dataset.x2.max() + 0.1])
+    plt.xlim([train_dataset.dataset.x1.min() - 0.1, train_dataset.dataset.x1.max() + 0.1])
+    plt.ylim([train_dataset.dataset.x2.min() - 0.1, train_dataset.dataset.x2.max() + 0.1])
 
     line_x = np.array(range(-10, 10, 1))
     line_y = line_x*0
-    line_PA, = plt.plot(line_x, line_y, c="#2980b9", label="PA")
+    line_PA,     = plt.plot(line_x, line_y, c="#2980b9", label="PA")
     line_PA_one, = plt.plot(line_x, line_y, c="#e74c3c", label="PA-1")
     line_PA_two, = plt.plot(line_x, line_y, c="#f1c40f", label="PA-2")
     
-    for i in range(len(y)):
-        plt.scatter(x=dataset.dataset.x1[i], y=dataset.dataset.x2[i], c=cm.cool(dataset.dataset.label[i]), alpha=0.5)
-        model.fit(feature_vec[i], y[i])
-        model_one.fit(feature_vec[i], y[i])
-        model_two.fit(feature_vec[i], y[i])
-
-        a, b, c = model.w
+    valid_result_sample = []
+    accuracies_PA = []
+    
+    for i in range(len(train_dataset.y)):
+        plt.scatter(x=train_dataset.dataset.x1[i], y=train_dataset.dataset.x2[i], c=cm.cool(train_dataset.dataset.label[i]), alpha=0.5)
+        model_PA.fit(train_dataset.feature_vec[i], train_dataset.y[i])
+        model_one.fit(train_dataset.feature_vec[i], train_dataset.y[i])
+        model_two.fit(train_dataset.feature_vec[i], train_dataset.y[i])
+            
+        # print(test_dataset.valid_training_result(model_PA))
+        # valid_result_sample.append(i)
+        # accuracies_PA.append(test_dataset.valid_training_result(model_PA))
+        
+        a, b, c = model_PA.w
         line_y = (a*line_x + c)/(-b)
         line_PA.set_data(line_x, line_y)
         
@@ -68,10 +70,7 @@ def main():
         line_PA_two.set_data(line_x, line_y)
         
         plt.legend(handles=[line_PA, line_PA_one, line_PA_two])
-        plt.pause(0.001)
-
-
-    #plt.show()
+        plt.pause(0.005)
 
 
 if __name__ == '__main__':

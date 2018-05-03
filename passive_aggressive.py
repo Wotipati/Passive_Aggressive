@@ -28,21 +28,18 @@ class PassiveAggressive:
 
 
 def main():
-    dataset = SimpleDataset(is_confused=True, x=3, y=5)
-    feature_vec = dataset.dataset.ix[:, "x1":"x2"]
-    feature_vec["b"] = np.ones(dataset.dataset.shape[0])
-    feature_vec = feature_vec.as_matrix()
-
-    y = dataset.dataset.ix[:,"label"]
-    y = y.as_matrix()
+    train_dataset = SimpleDataset(total_num=1000, is_confused=True, x=3, y=5, seed=1)
+    test_dataset  = SimpleDataset(total_num=300 , is_confused=False, x=3, y=5, seed=2)
 
     model = PassiveAggressive()
 
-    for i in range(len(y)):
-        model.fit(feature_vec[i], y[i])
+    for i in range(len(train_dataset.y)):
+        model.fit(train_dataset.feature_vec[i], train_dataset.y[i])
+
 
     print(model.w)
-    dataset.show_result(model.w)
+    print(test_dataset.valid_training_result(model))
+    train_dataset.show_result(model.w)
 
 
 if __name__ == '__main__':
