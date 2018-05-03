@@ -68,7 +68,7 @@ def main():
         line_PA_two.set_data(line_x, line_y)
         
         plt.legend(handles=[line_PA, line_PA_one, line_PA_two])
-        plt.pause(0.005)
+        plt.pause(0.001)
 
 
     #plt.show()

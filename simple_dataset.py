@@ -16,20 +16,24 @@ class SimpleDataset:
 
             self.dataset["label"] = self.dataset.apply(make_data_confused, axis=1)
 
+        self.feature_vec = self.dataset.ix[:, "x1":"x2"]
+        self.feature_vec["b"] = np.ones(self.dataset.shape[0])
+        self.feature_vec = self.feature_vec.as_matrix()
+
+        self.y = self.dataset.ix[:,"label"]
+        self.y = self.y.as_matrix()
+
 
     def valid_training_result(self, model):
-        feature_vec = self.dataset.ix[:, "x1":"x2"]
-        feature_vec["b"] = np.ones(self.dataset.shape[0])
-        feature_vec = feature_vec.as_matrix()
-        
-        y = self.dataset.ix[:,"label"]
-        y = y.as_matrix()
-
-        accuracies = []
         correct_data_counter = 0
-        for i in len(y)
-            a, b, c = model.w
-            predict_y = (a*feature_vec[i])
+        a, b, c = model.w
+
+        for i in range(len(self.y)):
+            predict_y = 1 if a*self.feature_vec[i][0] + b*self.feature_vec[i][1] + c > 0 else -1
+            if predict_y == self.y[i]:
+                correct_data_counter += 1
+
+        return correct_data_counter/len(self.y)
 
 
 
