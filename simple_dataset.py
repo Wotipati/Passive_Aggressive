@@ -17,6 +17,22 @@ class SimpleDataset:
             self.dataset["label"] = self.dataset.apply(make_data_confused, axis=1)
 
 
+    def valid_training_result(self, model):
+        feature_vec = self.dataset.ix[:, "x1":"x2"]
+        feature_vec["b"] = np.ones(self.dataset.shape[0])
+        feature_vec = feature_vec.as_matrix()
+        
+        y = self.dataset.ix[:,"label"]
+        y = y.as_matrix()
+
+        accuracies = []
+        correct_data_counter = 0
+        for i in len(y)
+            a, b, c = model.w
+            predict_y = (a*feature_vec[i])
+
+
+
     def show_dataset(self):
         plt.style.use('ggplot')
         plt.scatter(x=self.dataset.x1, y=self.dataset.x2, c=self.dataset.label, alpha=0.5)
