@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.animation as animation
 import matplotlib.gridspec as gridspec
+import argparse
 import matplotrecorder
 from simple_dataset import SimpleDataset
 from passive_aggressive import PassiveAggressive
@@ -30,6 +31,12 @@ class PassiveAggressiveTwo(PassiveAggressive):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--record', type=int, default=0)
+    args = parser.parse_args()
+    is_recorded = args.record
+
     train_dataset = SimpleDataset(total_num=250, is_confused=True,  x=3, y=5, seed=1)
     test_dataset  = SimpleDataset(total_num=100, is_confused=False, x=3, y=5, seed=2)
 
@@ -41,7 +48,6 @@ def main():
     fig_left  = fig.add_subplot(gs[0,:3])
     fig_right = fig.add_subplot(gs[0,4:])
 
-    #plt.style.use('seaborn-colorblind')
     fig_left.set_xlim([train_dataset.dataset.x1.min() - 0.1, train_dataset.dataset.x1.max() + 0.1])
     fig_left.set_ylim([train_dataset.dataset.x2.min() - 0.1, train_dataset.dataset.x2.max() + 0.1])
     fig_left.set_title("Input Data & Trained Boundary", fontsize=15)
@@ -67,7 +73,6 @@ def main():
     accuracies_PA_one = []
     imgs = []
 
-    #for i in range(80):
     for i in range(len(train_dataset.y)):
         fig_left.scatter(x=train_dataset.dataset.x1[i], y=train_dataset.dataset.x2[i], c=cm.cool(train_dataset.dataset.label[i]), alpha=0.5)
 
@@ -89,10 +94,13 @@ def main():
         fig_right.plot(accuracies_PA_one, c="#e74c3c", label="PA-1")
 
         plt.pause(0.005)
-        matplotrecorder.save_frame()
 
+        if is_recorded == 1:
+            matplotrecorder.save_frame()
 
-    matplotrecorder.save_movie("animation.mp4", 0.005)
+    if is_recorded == 1:
+        matplotrecorder.save_movie("results.mp4", 0.005)
+
 
 
 if __name__ == '__main__':
