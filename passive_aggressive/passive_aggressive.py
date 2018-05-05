@@ -20,8 +20,8 @@ class PassiveAggressive:
         self.t += 1
 
     def fit(self, vec_feature, y):
-        weight_dim = len(vec_feature)
         if self.w is None:
+            weight_dim = len(vec_feature)
             self.w = np.ones(weight_dim)
 
         self.update(vec_feature, y)
