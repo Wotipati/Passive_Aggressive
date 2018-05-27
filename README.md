@@ -30,3 +30,6 @@ The result is saved as "results.mp4"
 - [統計の素人だけどPythonで機械学習モデルを実装したい、そんな人のための第一歩](https://qiita.com/hik0107/items/9b6e1e989f4eaefdc31d)
 - [実装して理解するオンライン学習器(1) - PassiveAggresive](http://smrmkt.hatenablog.jp/entry/2014/10/13/124757)
 - [AtsushiSakai/matplotrecorder](https://github.com/AtsushiSakai/matplotrecorder)
+
+### License
+MIT License, Seita Kayukawa (Wotipati)
