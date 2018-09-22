@@ -8,7 +8,8 @@ Unlike PA algorithm which is a hard-margin based method, PA-Ⅰ algorithm is a s
 
 >"Koby Crammer, Ofer Dekel, Joseph Keshet, Shai Shalev-Shwartz, Yoram Singer, "Online Passive-Aggressive Algorithms" Journal of Machine Learning Research 7 (2006) 551–585."
 
-
+#### 日本語解説ページ (Qiita)
+[オンライン機械学習の弱点って？？：Passive Aggressiveのプロセスを実装＆可視化](https://qiita.com/Wotipati/items/a8eda3f246eb07c516ca)
 
 ## Example
 #### Show online learning process:
