@@ -1,4 +1,6 @@
 # Passive Aggressive
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
+
 ![ezgif com-resize](https://user-images.githubusercontent.com/26996041/39611189-d019a09c-4f90-11e8-853c-75d6ef24bc02.gif)
 </br>  
 **This python script visualizes the process of Online Passive-Aggressive (PA) algorithm and PA-Ⅰ algorithm.**
