@@ -6,7 +6,7 @@
 **This python script visualizes the process of Online Passive-Aggressive (PA) algorithm and PA-Ⅰ algorithm.**
 </br>   
 PA algorithm is a margin based online learning algorithm[Crammer et al.] for binary classification.  
-Unlike PA algorithm which is a hard-margin based method, PA-Ⅰ algorithm is a soft margin based method and robuster to noise.
+Unlike PA algorithm, which is a hard-margin based method, PA-I algorithm is a soft margin based method and robuster to noise.
 
 >"Koby Crammer, Ofer Dekel, Joseph Keshet, Shai Shalev-Shwartz, Yoram Singer, "Online Passive-Aggressive Algorithms" Journal of Machine Learning Research 7 (2006) 551–585."
 
@@ -20,7 +20,7 @@ python passive_aggressive_ex.py
 ```
 
 
-#### If you want to record results:
+#### If you want to record the result:
 ```
 python passive_aggresive_ex.py --record 1
 ```
